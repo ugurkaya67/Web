@@ -20,6 +20,18 @@
 
     <main>
         <h2>Découvrez notre sélection de fleurs</h2>
+        <!-- Carrousel de fleurs -->
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"  alt="Image de fleurs" class="carousel-image">
+                <img src="https://images.unsplash.com/photo-1582034721135-c262febea55b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"  alt="Image de fleurs" class="carousel-image">
+                <img src="https://images.unsplash.com/photo-1550785249-94c26e513df8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"     alt="Image de fleurs" class="carousel-image">
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"  alt="Image de fleurs" class="carousel-image">
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"  alt="Image de fleurs" class="carousel-image">
+                <img src="https://images.unsplash.com/photo-1582034721135-c262febea55b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1200&h=800"  alt="Image de fleurs" class="carousel-image">
+            </div>
+        </div>
+        <h3>Liste de nos fleurs :</h3>
         <ul>
             <li>🌸 Roses</li>
             <li>🌼 Marguerites</li>
@@ -32,5 +44,48 @@
     <footer>
         <p>&copy; 2024 Fleuriste. Tous droits réservés.</p>
     </footer>
+
+    <!-- Script JavaScript pour le carrousel -->
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const images = document.querySelectorAll('.carousel-image');
+        const totalImages = images.length;
+        const imagesToShow = 3; // Nombre d'images affichées à la fois
+        const shift = 100 / imagesToShow; // Pourcentage du défilement à chaque fois
+
+        let currentIndex = 0;
+
+        // Cloner les premières images à la fin pour créer l'effet de boucle
+        for (let i = 0; i < imagesToShow; i++) {
+            const clone = images[i].cloneNode(true);
+            carousel.appendChild(clone);
+        }
+
+        function showNextImages() {
+            currentIndex++;
+
+            // Déplacement normal du carrousel
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            carousel.style.transform = `translateX(-${currentIndex * shift}%)`;
+
+            // Si nous atteignons les images clonées, réinitialiser le carrousel
+            if (currentIndex === totalImages) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none'; // Désactiver l'animation pour la réinitialisation
+                    currentIndex = 0;
+                    carousel.style.transform = `translateX(0)`; // Revenir à la première position
+
+                    // Forcer un reflow pour s'assurer que la transition est appliquée après le reset
+                    void carousel.offsetWidth;
+
+                    // Réactiver la transition pour la suite
+                    carousel.style.transition = 'transform 0.5s ease-in-out';
+                }, 500); // Délai correspondant à la durée de la transition (0.5s)
+            }
+        }
+
+        // Défilement automatique toutes les 3 secondes
+        setInterval(showNextImages, 3000);
+    </script>
 </body>
 </html>

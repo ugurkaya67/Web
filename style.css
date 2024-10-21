@@ -58,3 +58,22 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Styles pour le carrousel */
+.carousel-container {
+    width: 100%;
+    max-width: 2000px; /* Largeur maximale du carrousel */
+    margin: 20px auto; /* Centrer le carrousel */
+    overflow: hidden; /* Masquer les images qui dépassent */
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Animation fluide lors du changement d'image */
+}
+
+.carousel-image {
+    flex: 1 0 calc(100% / 3); /* 3 images visibles à la fois */
+    height: 400px; /* Hauteur des images */
+    object-fit: cover; /* Les images remplissent leur conteneur sans être déformées */
+}
